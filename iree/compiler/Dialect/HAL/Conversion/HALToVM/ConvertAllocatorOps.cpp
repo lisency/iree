@@ -56,15 +56,15 @@ class AllocatorAllocateConstOpConversion
                                                op.value().getType(), rewriter);
     SmallVector<Value, 8> callOperands = {
         opAdaptor.allocator(),
-        rewriter.create<mlir::ConstantOp>(
+        rewriter.createOrFold<mlir::ConstantOp>(
             op.getLoc(), rewriter.getI32IntegerAttr(
                              static_cast<int32_t>(op.memory_types()))),
-        rewriter.create<mlir::ConstantOp>(
+        rewriter.createOrFold<mlir::ConstantOp>(
             op.getLoc(), rewriter.getI32IntegerAttr(
                              static_cast<int32_t>(op.buffer_usage()))),
     };
     callOperands.append(shape.begin(), shape.end());
-    callOperands.push_back(rewriter.create<mlir::ConstantOp>(
+    callOperands.push_back(rewriter.createOrFold<mlir::ConstantOp>(
         op.getLoc(),
         IREE::HAL::getElementTypeAttr(op.value().getType().getElementType())));
     callOperands.push_back(loadRodataOp.getResult());
