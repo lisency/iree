@@ -53,7 +53,7 @@ iree_cc_library(
     "bytecode_module.h"
   SRCS
     "bytecode_dispatch.c"
-    "bytecode_module.cc"
+    "bytecode_module.c"
     "bytecode_module_impl.h"
     "bytecode_op_table.h"
   DEPS
