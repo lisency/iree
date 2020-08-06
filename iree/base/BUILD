@@ -27,7 +27,6 @@ cc_library(
     name = "alignment",
     hdrs = ["alignment.h"],
     deps = [
-        ":platform_headers",
         ":target_platform",
     ],
 )
@@ -89,7 +88,6 @@ cc_library(
     name = "atomics",
     hdrs = ["atomics.h"],
     deps = [
-        ":platform_headers",
         ":target_platform",
     ],
 )
@@ -122,7 +120,6 @@ cc_library(
     linkopts = ["-ldl"],
     deps = [
         ":logging",
-        ":platform_headers",
         ":status",
         ":target_platform",
         ":tracing",
@@ -320,7 +317,6 @@ cc_library(
     hdrs = ["main.h"],
     deps = [
         ":logging",
-        ":platform_headers",
         ":target_platform",
     ],
 )
@@ -338,14 +334,6 @@ cc_library(
     hdrs = ["memory.h"],
     deps = [
         "@com_google_absl//absl/types:span",
-    ],
-)
-
-cc_library(
-    name = "platform_headers",
-    hdrs = ["platform_headers.h"],
-    deps = [
-        ":target_platform",
     ],
 )
 
