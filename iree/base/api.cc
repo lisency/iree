@@ -32,8 +32,12 @@ IREE_API_EXPORT int IREE_API_CALL
 iree_string_view_compare(iree_string_view_t lhs, iree_string_view_t rhs) {
   size_t min_size = std::min(lhs.size, rhs.size);
   int cmp = strncmp(lhs.data, rhs.data, min_size);
-  if (cmp != 0) return cmp;
-  return (int)(rhs.size - lhs.size);
+  if (cmp != 0) {
+    return cmp;
+  } else if (lhs.size == rhs.size) {
+    return 0;
+  }
+  return lhs.size < rhs.size ? -1 : 1;
 }
 
 IREE_API_EXPORT bool IREE_API_CALL iree_string_view_starts_with(
@@ -44,7 +48,7 @@ IREE_API_EXPORT bool IREE_API_CALL iree_string_view_starts_with(
   return strncmp(value.data, prefix.data, prefix.size) == 0;
 }
 
-IREE_API_EXPORT int IREE_API_CALL iree_string_view_split(
+IREE_API_EXPORT intptr_t IREE_API_CALL iree_string_view_split(
     iree_string_view_t value, char split_char, iree_string_view_t* out_lhs,
     iree_string_view_t* out_rhs) {
   if (!value.data || !value.size) {
@@ -54,8 +58,8 @@ IREE_API_EXPORT int IREE_API_CALL iree_string_view_split(
   if (!first_ptr) {
     return -1;
   }
-  int offset =
-      static_cast<int>(reinterpret_cast<const char*>(first_ptr) - value.data);
+  intptr_t offset =
+      (intptr_t)(reinterpret_cast<const char*>(first_ptr) - value.data);
   if (out_lhs) {
     out_lhs->data = value.data;
     out_lhs->size = offset;
