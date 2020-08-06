@@ -35,7 +35,6 @@ iree_cc_library(
   DEPS
     ::api_hdrs
     ::api_util
-    ::init
     ::tracing
     absl::time
   PUBLIC

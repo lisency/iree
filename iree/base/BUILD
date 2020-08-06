@@ -40,7 +40,6 @@ cc_library(
     deps = [
         ":api_hdrs",
         ":api_util",
-        ":init",
         ":tracing",
         "@com_google_absl//absl/time",
     ],
