@@ -50,19 +50,14 @@ config_setting(
 #   --define=PYIREE_TF_DISABLE_KERNELS=1
 # See: https://github.com/google/iree/issues/1506
 SAVED_MODEL_TF_RUNTIME_DEPS = [
-    "@org_tensorflow//tensorflow/core:ops",
 ] + select({
     ":disable_kernels": [],
     "//conditions:default": [
-        "@org_tensorflow//tensorflow/core/kernels:array",
-        "@org_tensorflow//tensorflow/core/kernels:math",
     ],
 })
 
 TF_XLA_PASS_DEPS = [
-    "@org_tensorflow//tensorflow/compiler/mlir/tensorflow:tensorflow_dialect_registration",
     "//integrations/tensorflow/compiler:tensorflow",
-    "@org_tensorflow//tensorflow/compiler/mlir/xla:xla_legalize_tf",
 ]
 
 iree_py_library(
@@ -91,6 +86,7 @@ iree_py_extension(
         ":compiler_library",
         "//bindings/python/pyiree/common",
         "//bindings/python/pyiree/compiler:compiler_library",
+        "//thirdparty/tensorflow:tensorflow",
     ],
 )
 
@@ -102,15 +98,13 @@ pybind_cc_library(
     hdrs = [
         "register_tensorflow.h",
     ],
+    copts = ['-Ithirdparty/tensorflow/include'],
     deps = SAVED_MODEL_TF_RUNTIME_DEPS + TF_XLA_PASS_DEPS + [
+        "//thirdparty/tensorflow:tensorflow",
         "//bindings/python/pyiree/common",
         "//bindings/python/pyiree/compiler:compiler_library",
         "@llvm-project//llvm:Support",
         "@llvm-project//mlir:IR",
-        "@org_tensorflow//tensorflow/cc/saved_model:loader_lite",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow:convert_graphdef",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow:tf_saved_model_passes",
-        "@org_tensorflow//tensorflow/core:core_cpu",
     ],
 )
 

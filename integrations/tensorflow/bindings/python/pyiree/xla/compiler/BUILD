@@ -82,8 +82,6 @@ pybind_cc_library(
         "//bindings/python/pyiree/compiler:compiler_library",
         "@llvm-project//llvm:Support",
         "@llvm-project//mlir:IR",
-        "@org_tensorflow//tensorflow/compiler/mlir/xla:hlo_module_importer",
-        "@org_tensorflow//tensorflow/compiler/xla/client:xla_computation",
     ],
 )
 
@@ -97,6 +95,5 @@ iree_py_test(
     deps = INTREE_TENSORFLOW_PY_DEPS + NUMPY_DEPS + [
         "@absl_py//absl/testing:absltest",
         "//integrations/tensorflow/bindings/python/pyiree/xla/compiler",
-        "@org_tensorflow//tensorflow/compiler/xla/python:xla_client",
     ],
 )

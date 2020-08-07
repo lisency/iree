@@ -28,6 +28,7 @@ cc_library(
     hdrs = [
         "convert_tf_to_tf_tensorlist.h",
     ],
+    copts = ['-Ithirdparty/tensorflow/include'],
     deps = [
         ":convert_tf_to_tf_tensorlist_rewriter_gen",
         "//integrations/tensorflow/compiler/dialect/tf_tensorlist/ir:tf_tensorlist_dialect",
@@ -35,7 +36,8 @@ cc_library(
         "@llvm-project//mlir:Pass",
         "@llvm-project//mlir:StandardOps",
         "@llvm-project//mlir:Transforms",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow",
+        "@llvm-project//mlir:DerivedAttributeOpInterface",
+        "//thirdparty/tensorflow:tensorflow",
     ],
     alwayslink = 1,
 )
@@ -67,6 +69,7 @@ cc_library(
     hdrs = [
         "convert_flow_to_hal.h",
     ],
+    copts = ['-Ithirdparty/tensorflow/include'],
     deps = [
         "//integrations/tensorflow/compiler/dialect/tf_tensorlist/ir",
         "//iree/compiler/Dialect/HAL/Conversion",
@@ -75,7 +78,7 @@ cc_library(
         "@llvm-project//mlir:IR",
         "@llvm-project//mlir:Pass",
         "@llvm-project//mlir:Transforms",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow",
+        "//thirdparty/tensorflow:tensorflow",
     ],
     alwayslink = 1,
 )

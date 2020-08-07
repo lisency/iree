@@ -128,7 +128,7 @@ maybe(
 maybe(
     local_repository,
     name = "org_tensorflow",
-    path = "third_party/tensorflow",
+    path = "/data1/hdp-guanggao/tensorflow_src",
 )
 
 # Import all of the tensorflow dependencies.

@@ -41,6 +41,7 @@ cc_library(
     textual_hdrs = [
         "tf_tensorlist_ops.cc.inc",
     ],
+    copts = ['-Ithirdparty/tensorflow/include'],
     deps = [
         ":tf_tensorlist_ops_gen",
         "//iree/compiler/Dialect/HAL/IR",
@@ -48,8 +49,7 @@ cc_library(
         "@llvm-project//mlir:IR",
         "@llvm-project//mlir:InferTypeOpInterface",
         "@llvm-project//mlir:SideEffects",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow:tensorflow_types",
+        "//thirdparty/tensorflow:tensorflow",
     ],
 )
 
@@ -57,10 +57,12 @@ cc_library(
     name = "tf_tensorlist_dialect",
     srcs = ["tf_tensorlist_dialect.cc"],
     hdrs = ["tf_tensorlist_dialect.h"],
+    copts = ['-Ithirdparty/tensorflow/include'],
     deps = [
         ":ir",
         "//integrations/tensorflow/compiler/dialect/tf_tensorlist/conversion:convert_flow_to_hal",
         "//iree/compiler/Dialect/IREE/IR",
+        "//thirdparty/tensorflow:tensorflow",
         "@llvm-project//mlir:IR",
     ],
     alwayslink = 1,

@@ -131,7 +131,8 @@ def launch_jupyter(python_path):
   sys.argv = [
       "jupyter", "notebook",
       "--NotebookApp.allow_origin='https://colab.research.google.com'",
-      "--port=8888", "--NotebookApp.port_retries=0"
+      "--port=8888", "--NotebookApp.port_retries=0",
+      "--ip=10.173.46.91"
   ]
   sys.exit(jupyter_main())
 

@@ -32,6 +32,7 @@ cc_library(
     defines = [
         "IREE_COMPILER_TENSORFLOW_ENABLED",
     ],
+    copts = ['-Ithirdparty/tensorflow/include'],
     deps = [
         "//integrations/tensorflow/compiler/dialect/tf_strings/conversion:convert_tf_to_tf_strings",
         "//integrations/tensorflow/compiler/dialect/tf_tensorlist/conversion:convert_tf_to_tf_tensorlist",
@@ -41,6 +42,7 @@ cc_library(
         "//iree/compiler/Dialect/IREE/IR",
         "//iree/compiler/Dialect/Shape/Conversion",
         "//iree/compiler/Dialect/Shape/Transforms",
+        "//thirdparty/tensorflow:tensorflow",
         "@llvm-project//llvm:Support",
         "@llvm-project//mlir:IR",
         "@llvm-project//mlir:Pass",
@@ -48,8 +50,6 @@ cc_library(
         "@llvm-project//mlir:ShapeTransforms",
         "@llvm-project//mlir:Support",
         "@llvm-project//mlir:TransformUtils",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow:tensorflow_types",
     ],
     alwayslink = 1,
 )

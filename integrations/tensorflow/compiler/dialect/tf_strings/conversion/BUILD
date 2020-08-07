@@ -77,6 +77,7 @@ cc_library(
     hdrs = [
         "convert_tf_to_tf_strings.h",
     ],
+    copts = ['-Ithirdparty/tensorflow/include'],
     deps = [
         ":convert_tf_to_tf_strings_rewriter_gen",
         "//integrations/tensorflow/compiler/dialect/tf_strings/ir",
@@ -89,8 +90,8 @@ cc_library(
         "@llvm-project//mlir:StandardOpsTransforms",
         "@llvm-project//mlir:Support",
         "@llvm-project//mlir:Transforms",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow",
-        "@org_tensorflow//tensorflow/compiler/mlir/tensorflow:tensorflow_types",
+        "@llvm-project//mlir:DerivedAttributeOpInterface",
+        "//thirdparty/tensorflow:tensorflow",
     ],
     alwayslink = 1,
 )
